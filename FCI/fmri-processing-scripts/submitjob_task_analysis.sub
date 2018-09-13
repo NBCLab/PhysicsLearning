@@ -1,0 +1,31 @@
+#!/bin/bash
+#---Number of core
+#BSUB -n 1
+
+#---Job's name in LSF system
+#BSUB -J fsl_nsf_fci
+
+#---Error file
+#BSUB -eo err
+
+#---Output file
+#BSUB -oo out
+
+#---LSF Queue name
+#BSUB -q PQ_nbc
+
+##########################################################
+# Setup envrionmental variable.
+##########################################################
+export NPROCS=`echo $LSB_HOSTS | wc -w`
+export OMP_NUM_THREADS=$NPROCS
+
+. $MODULESHOME/../global/profile.modules
+module load afni #loads AFNI scripts to be able to use them
+module load gsl-blas/1.15
+module load python/2.7.5
+module load fsl
+##########################################################
+##########################################################
+
+bash task_analysis.sh 101 
