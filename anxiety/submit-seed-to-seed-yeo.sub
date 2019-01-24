@@ -1,0 +1,27 @@
+#!/bin/bash
+#---Number of core
+#BSUB -n 1
+
+#---Job's name in LSF system
+#BSUB -J anxiety-physics
+
+#---Error file
+#BSUB -eo /home/data/nbc/anxiety-physics/errors
+
+#---Output file
+#BSUB -oo /home/data/nbc/anxiety-physics/outputs
+
+
+##########################################################
+# Setup envrionmental variable.
+##########################################################
+export NPROCS=`echo $LSB_HOSTS | wc -w`
+export OMP_NUM_THREADS=$NPROCS
+
+. $MODULESHOME/../global/profile.modules
+module load anaconda/2.7.13
+module load gsl-blas/1.15
+##########################################################
+##########################################################
+
+python seed-to-seed-prepost-yeo.py
