@@ -48,50 +48,22 @@ connectivity_metric = 'correlation'
 thresh_range = np.arange(0.1, 1, 0.1)
 
 for i in np.arange(0, (len(sessions))):
-    print sessions[i]
     for s in subjects:
         if not exists(join(sink_dir, sessions[i], s)):
             makedirs(join(sink_dir, sessions[i], s))
         fmri_file = join(directories[i], '{0}_filtered_func_data_mni.nii.gz'.format(s))
-        print fmri_file
         confounds = join(sink_dir, sessions[i], s, '{0}_confounds.txt'.format(s))
-        print confounds
-        #post_fmri_file = join(post_dir, '{0}_filtered_func_data_mni.nii.gz'.format(s))
-
-        #read in motion parameters from mcflirt output file
-        #motion = np.genfromtxt(join(data_dir, s, 'session-{0}'.format(i), 'resting-state', 'resting-state-0', 'endor1.feat', 'mc', 'prefiltered_func_data_mcf.par'))
-        #outliers_censored = join(directories[i], '{0}_confounds.txt'.format(s))
-
-        #if exists(outliers_censored):
-            #print "outliers file exists!"
-            #outliers = np.genfromtxt(pre_outliers_censored)
-            #confounds = outliers_censored
-
-        #else:
-            #print "No outliers file found for {0} {1}".format(sessions[i], s)
-            #np.savetxt((join(sink_dir, sessions[i], s, '{0}_confounds.txt'.format(s))), motion)
-            #confounds = join(data_dir, s, 'session-{0}'.format(i), 'resting-state', 'resting-state-0', 'endor1.feat', 'mc', 'prefiltered_func_data_mcf.par')
-
         #create correlation matrix from PRE resting state files
         network_time_series = network_masker.fit_transform(fmri_file, confounds)
-        print network_time_series.shape
         np.savetxt(join(sink_dir, sessions[i], s, '{0}_laird2011_ts.csv'.format(s)), network_time_series, delimiter=",")
-        #region_time_series = region_masker.fit_transform (fmri_file, confounds)
-        #connectivity = ConnectivityMeasure(kind='correlation')
-
-        #network_correlation_matrix = connectivity.fit_transform([network_time_series])[0]
         network_correlation_matrix = np.corrcoef(network_time_series)
-        print network_correlation_matrix
         #network_correlation_matrix = np.corrcoef(network_time_series)
         #region_correlation_matrix = correlation_measure.fit_transform([region_time_series])[0]
-        #np.savetxt(join(sink_dir, sessions[i], s, '{0}_region_corrmat_Yeo7.csv'.format(s)), region_correlation_matrix, delimiter=",")
         np.savetxt(join(sink_dir, sessions[i], s, '{0}_network_corrmat_Laird2011.csv'.format(s)), network_correlation_matrix, delimiter=",")
 
         network = {}
         network_wise = {}
 
-        #talking with Kim:
-        #start threhsolding (least conservative) at the lowest threshold where you lose your negative connection weights
         #steps of 5 or 10 percent
         #citation for integrating over the range is likely in the Fundamentals of Brain Network Analysis book
         #(http://www.danisbassett.com/uploads/1/1/8/5/11852336/network_analysis_i__ii.pdf)

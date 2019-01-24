@@ -79,22 +79,6 @@ for s in subjects:
             makedirs(join(sink_dir, sessions[i], s))
         fmri_file = join(directories[i], '{0}_filtered_func_data_mni.nii.gz'.format(s))
         confounds = join(sink_dir, sessions[i], s, '{0}_confounds.txt'.format(s))
-        #post_fmri_file = join(post_dir, '{0}_filtered_func_data_mni.nii.gz'.format(s))
-
-        #read in motion parameters from mcflirt output file
-        #motion = np.genfromtxt(join(data_dir, s, 'session-{0}'.format(i), 'resting-state', 'resting-state-0', 'endor1.feat', 'mc', 'prefiltered_func_data_mcf.par'))
-        #outliers_censored = join(directories[i], '{0}_confounds.txt'.format(s))
-
-        #if exists(outliers_censored):
-            #print "outliers file exists!"
-            #outliers = np.genfromtxt(pre_outliers_censored)
-            #confounds = outliers_censored
-
-        #else:
-            #print "No outliers file found for {0} {1}".format(sessions[i], s)
-            #np.savetxt((join(sink_dir, sessions[i], s, '{0}_confounds.txt'.format(s))), motion)
-            #confounds = join(data_dir, s, 'session-{0}'.format(i), 'resting-state', 'resting-state-0', 'endor1.feat', 'mc', 'prefiltered_func_data_mcf.par')
-
         #create correlation matrix from PRE resting state files
         #network_time_series = network_masker.fit_transform(fmri_file, confounds)
         network_time_series = yeo_ntwk_masker.fit_transform(fmri_file, confounds)
@@ -109,10 +93,6 @@ for s in subjects:
         regn_corrmat = pd.DataFrame(data=region_correlation_matrix, index=yeo_7_regn_labels, columns=yeo_7_regn_labels)
         ntwk_corrmat.to_csv(join(sink_dir, sessions[i], s, '{0}_yeo7_ntwk_corrmat.csv'.format(s)))
         regn_corrmat.to_csv(join(sink_dir, sessions[i], s, '{0}_yeo7_regn_corrmat.csv'.format(s)))
-
-        #df.at[s, 'dmn-van {0}'.format(sessions[i])] = ntwk_corrmat['Default Mode']['Ventral Attention']
-        #df.at[s, 'van-fpn {0}'.format(sessions[i])] = ntwk_corrmat['Ventral Attention']['Frontoparietal']
-        #df.at[s, 'fpn-dmn {0}'.format(sessions[i])] = ntwk_corrmat['Frontoparietal']['Default Mode']
 
         for ntwk1 in yeo_7_ntwk_labels:
             for ntwk2 in yeo_7_ntwk_labels:
