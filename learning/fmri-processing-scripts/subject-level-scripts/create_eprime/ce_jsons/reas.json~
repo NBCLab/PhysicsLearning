@@ -1,0 +1,21 @@
+{
+    "headers": [
+        "Subject", 
+        "Session", 
+        "SessionDate", 
+        "ContrastValue", 
+        "Fixation10secWarmUp1.OnsetTime", 
+        "C1.RT", 
+        "C1.RTTime", 
+        "C1.ACC", 
+        "C1.CRESP", 
+        "C1.RESP", 
+        "QuestionNumber"
+    ], 
+    "rem_nulls": true, 
+    "merge_cols": {}, 
+    "null_cols": [
+        "C1.RTTime"
+    ], 
+    "replace_dict": {}
+}

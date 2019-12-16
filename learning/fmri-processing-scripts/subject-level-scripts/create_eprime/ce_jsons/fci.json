@@ -1,0 +1,28 @@
+{
+    "headers": [
+        "Subject", 
+        "Session", 
+        "SessionDate", 
+        "Experiment", 
+        "FCIQuestionBlock1.Cycle", 
+        "NonFCIQuestionBlock1.Cycle", 
+        "Question", 
+        "Slide3.RESP", 
+        "Slide3.CRESP", 
+        "Slide3.ACC", 
+        "Slide1.RT", 
+        "Slide2.RT", 
+        "Slide3.RT", 
+        "Fixation4secAfterWarmUp.OnsetTime", 
+        "Slide1.OnsetTime", 
+        "Slide2.OnsetTime", 
+        "Slide3.OnsetTime", 
+        "Fixation2.OnsetTime"
+    ], 
+    "rem_nulls": true, 
+    "merge_cols": {}, 
+    "null_cols": [
+        "Slide1.RT"
+    ], 
+    "replace_dict": {}
+}

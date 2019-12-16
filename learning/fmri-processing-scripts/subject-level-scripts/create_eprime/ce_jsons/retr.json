@@ -1,0 +1,30 @@
+{
+    "headers": [
+        "Subject", 
+        "Session", 
+        "SessionDate", 
+        "Fixation10secWarmUp.OnsetTime", 
+        "ExpSlide.OnsetTime", 
+        "ExpSlide2.OnsetTime", 
+        "Fixation10sec.OnsetTime", 
+        "QuestionType", 
+        "Procedure", 
+        "ExpSlide.RESP", 
+        "ExpSlide2.RESP", 
+        "ExpSlide.CRESP", 
+        "ExpSlide2.CRESP", 
+        "CorrectAns", 
+        "ExpSlide.ACC", 
+        "ExpSlide2.ACC", 
+        "ExpSlide.RT", 
+        "ExpSlide2.RT", 
+        "ExpSlide.RTTime", 
+        "ExpSlide2.RTTime"
+    ], 
+    "rem_nulls": true, 
+    "merge_cols": {}, 
+    "null_cols": [
+        "Procedure"
+    ], 
+    "replace_dict": {}
+}
